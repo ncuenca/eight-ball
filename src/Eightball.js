@@ -3,20 +3,25 @@ import _ from 'lodash';
 import './Eightball.css';
 
 function Eightball(props) {
-    const [pushed, setPushed] = useState(false);
-    const [answer, setAnswer] = useState(_.sample(props.answers));
+    // const [pushed, setPushed] = useState(false);
+    const [answer, setAnswer] = useState(
+        {msg:"Think of a question.", color:"black"}
+    );
 
 
     function handleClick() {
-        setPushed(true);
+        // setPushed(true);
         setAnswer(_.sample(props.answers));
     }
 
     return (
         <button 
-            className={`eight-ball ${pushed ? `${answer.color}` : "black"}`} 
-            onClick={handleClick}>
-        <b>{pushed ? `${answer.msg}` : "Think of a question."}</b>
+        className={`eight-ball`} 
+        // className={`eight-ball ${pushed ? `${answer.color}` : "black"}`} 
+        onClick={handleClick}
+        style={{"background-color":`${answer.color}`}}>
+        {/* <b>{pushed ? `${answer.msg}` : "Think of a question."}</b> */}
+        <b>{answer.msg}</b>
         </button>
     );
 }
