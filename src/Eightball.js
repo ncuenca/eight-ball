@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import _ from 'lodash';
+import './Eightball.css';
 
 function Eightball(props) {
     const [pushed, setPushed] = useState(false);
@@ -12,7 +13,9 @@ function Eightball(props) {
     }
 
     return (
-        <button className="btn" onClick={handleClick}>
+        <button 
+            className={`eight-ball ${pushed ? `${answer.color}` : "black"}`} 
+            onClick={handleClick}>
         <b>{pushed ? `${answer.msg}` : "Think of a question."}</b>
         </button>
     );
