@@ -4,25 +4,51 @@ import './Eightball.css';
 
 function Eightball(props) {
     // const [pushed, setPushed] = useState(false);
+
     const [answer, setAnswer] = useState(
         {msg:"Think of a question.", color:"black"}
     );
+    const [colorsToScores, setScore] = useState({
+        'red':0,
+        'green':0,
+        'goldenrod':0
+    });
 
 
     function handleClick() {
         // setPushed(true);
-        setAnswer(_.sample(props.answers));
+        const newAnswer = _.sample(props.answers);
+        setAnswer(newAnswer);
+        const newColorsToScores = {...colorsToScores}
+        newColorsToScores[newAnswer.color]++;
+        setScore(newColorsToScores);
+    }
+
+    function handleReset() {
+        // setPushed(true);
+        setAnswer({msg:"Think of a question.", color:"black"});
+        setScore({
+            'red':0,
+            'green':0,
+            'goldenrod':0
+        });
     }
 
     return (
-        <button 
-        className={`eight-ball`} 
-        // className={`eight-ball ${pushed ? `${answer.color}` : "black"}`} 
-        onClick={handleClick}
-        style={{"background-color":`${answer.color}`}}>
-        {/* <b>{pushed ? `${answer.msg}` : "Think of a question."}</b> */}
-        <b>{answer.msg}</b>
-        </button>
+        <div>
+            <button 
+                className={`eight-ball`} 
+                // className={`eight-ball ${pushed ? `${answer.color}` : "black"}`} 
+                onClick={handleClick}
+                style={{"backgroundColor":`${answer.color}`}}>
+                {/* <b>{pushed ? `${answer.msg}` : "Think of a question."}</b> */}
+                <b>{answer.msg}</b>
+            </button>
+            <button onClick={handleReset}>
+                Reset
+            </button>
+            <p>Green: {colorsToScores['green']} Red: {colorsToScores['red']} Goldenrod: {colorsToScores['goldenrod']}</p>
+        </div>
     );
 }
 
